@@ -1,4 +1,3 @@
-# sampada
 
 # Sampada
 

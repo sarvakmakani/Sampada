@@ -36,7 +36,11 @@ export default function StoreQRCode({ url }) {
 
       <div className="flex justify-center">
         <div className="bg-white p-4 rounded-lg border">
-          <QRCode id="store-qr" value={url} size={180} />
+          {url ? (
+            <QRCode id="store-qr" value={url} size={180} />
+          ) : (
+            <p className="text-sm text-slate-400">QR loading...</p>
+          )}
         </div>
       </div>
 

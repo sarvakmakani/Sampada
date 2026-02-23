@@ -18,6 +18,7 @@ export default function DashboardPage() {
   const [store, setStore] = useState(null);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const [storeUrl, setStoreUrl] = useState("");
   useAuth();
   const completionItems = store
     ? [
@@ -31,6 +32,11 @@ export default function DashboardPage() {
       ]
     : [];
 
+  useEffect(() => {
+    if (store?.slug) {
+      setStoreUrl(`${window.location.origin}/store/${store.slug}`);
+    }
+  }, [store]);
   const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   const total = completionItems.length;
@@ -131,7 +137,6 @@ export default function DashboardPage() {
             {/* STORE CARD */}
             <div className="bg-white border rounded-xl p-6 lg:col-span-2">
               <h2 className="font-semibold text-lg mb-4">Your Store</h2>
-
               <div className="flex gap-4 items-center">
                 <div className="w-12 h-12 bg-blue-100 text-brand-primary rounded-lg flex items-center justify-center font-bold text-xl">
                   {store?.name?.[0] || "S"}
@@ -144,7 +149,6 @@ export default function DashboardPage() {
                   </p>
                 </div>
               </div>
-
               {/* STORE LINK */}
               <div className="mt-6 bg-slate-100 rounded-lg px-4 py-3 flex justify-between items-center">
                 <p className="text-sm truncate">
@@ -163,7 +167,6 @@ export default function DashboardPage() {
                   Copy
                 </button>
               </div>
-
               {/* ACTION BUTTONS */}
               <div className="flex gap-3 mt-6">
                 <button
@@ -183,7 +186,7 @@ export default function DashboardPage() {
                 </button>
               </div>
               <StoreQRCode
-                url={`${window.location.origin}/store/${store.slug}`}
+                url={`${process.env.NEXT_PUBLIC_BASE_URL}/store/${store.slug}`}
               />
             </div>
             {/* <div className="bg-white border rounded-xl p-6 mb-8"></div> */}

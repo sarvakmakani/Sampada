@@ -147,7 +147,6 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-
 //  TOGGLE PRODUCT AVAILABILITY
 export const toggleProductAvailability = async (req, res) => {
   try {

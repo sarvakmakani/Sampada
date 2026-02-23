@@ -46,6 +46,7 @@ export const createStore = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 // track clicks
 export const trackClicks =  async (req, res) => {
   const { storeId } = req.body;
@@ -58,7 +59,8 @@ export const trackClicks =  async (req, res) => {
 
   res.json({ success: true });
 }
-// get sytore b slug
+
+// get store by slug
 export const getStoreBySlug = async (req, res) => {
   try {
     const { slug } = req.params;

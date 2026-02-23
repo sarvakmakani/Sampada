@@ -4,12 +4,65 @@ import jwt from "jsonwebtoken";
 
 const generateToken = (sellerId) => {
   return jwt.sign({ id: sellerId }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
+    expiresIn: "1d", // more secure than 7d
   });
 };
 
-// register
+// ================= REGISTER =================
 export const registerSeller = async (req, res) => {
+  try {
+    const { phone, password } = req.body;
+
+    // Basic validation
+    if (!phone || !password) {
+      return res.status(400).json({ message: "Phone and password required" });
+    }
+
+    // Phone format validation (India)
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      return res.status(400).json({ message: "Invalid phone number" });
+    }
+
+    // Strong password validation
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&*!]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        message:
+          "Password must be at least 8 characters and include letters and numbers",
+      });
+    }
+
+    // Check existing seller
+    const existingSeller = await Seller.findOne({ phone });
+    if (existingSeller) {
+      return res.status(400).json({ message: "Seller already exists" });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create seller
+    const seller = await Seller.create({
+      phone,
+      password: hashedPassword,
+    });
+
+    // Generate JWT immediately
+    const token = generateToken(seller._id);
+
+    res.status(201).json({
+      message: "Seller registered successfully",
+      token,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ================= LOGIN =================
+export const loginWithPassword = async (req, res) => {
   try {
     const { phone, password } = req.body;
 
@@ -17,95 +70,30 @@ export const registerSeller = async (req, res) => {
       return res.status(400).json({ message: "Phone and password required" });
     }
 
-    const existingSeller = await Seller.findOne({ phone });
-    if (existingSeller) {
-      return res.status(400).json({ message: "Seller already exists" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const seller = await Seller.create({
-      phone,
-      password: hashedPassword,
-      isVerified: false,
-    });
-
-    const otp = "123456";
-
-    res.status(201).json({
-      message: "Seller registered. Verify OTP.",
-      otp, // remove later when real SMS
-      sellerId: seller._id,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// VERIFY OTP (for register or login)
-export const verifyOtp = async (req, res) => {
-  try {
-    const { phone, otp } = req.body;
-
-    if (otp !== "123456") {
-      return res.status(400).json({ message: "Invalid OTP" });
-    }
-
     const seller = await Seller.findOne({ phone });
+
+    // Generic error for security
     if (!seller) {
-      return res.status(404).json({ message: "Seller not found" });
+      return res.status(400).json({
+        message: "Invalid phone or password",
+      });
     }
-
-    seller.isVerified = true;
-    await seller.save();
-
-    const token = generateToken(seller._id);
-
-    res.json({
-      token,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// LOGIN WITH PASSWORD
-export const loginWithPassword = async (req, res) => {
-  try {
-    const { phone, password } = req.body;
-
-    const seller = await Seller.findOne({ phone });
-    if (!seller) {
-      return res.status(404).json({ message: "Seller not found" });
-    }
-    console.log("JWT_SECRET in sign:", process.env.JWT_SECRET);
 
     const isMatch = await bcrypt.compare(password, seller.password);
+
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({
+        message: "Invalid phone or password",
+      });
     }
 
     const token = generateToken(seller._id);
 
     res.json({
+      message: "Login successful",
       token,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
-
-// LOGIN WITH OTP (SEND OTP)
-export const loginWithOtp = async (req, res) => {
-  const { phone } = req.body;
-
-  if (!phone) {
-    return res.status(400).json({ message: "Phone required" });
-  }
-
-  // Mock OTP
-  res.json({
-    message: "OTP sent",
-    otp: "123456",
-  });
 };

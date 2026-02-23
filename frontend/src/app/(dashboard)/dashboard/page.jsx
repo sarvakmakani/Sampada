@@ -2,7 +2,7 @@
 import { BarChart3, MousePointerClick, Package } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import StoreQRCode from "@/app/StoreQRCode/page.jsx";
+import StoreQRCode from "@/app/components/StoreQRCode";
 import useAuth from "@/app/hooks/useAuth";
 import {
   PackagePlus,
@@ -18,7 +18,6 @@ export default function DashboardPage() {
   const [store, setStore] = useState(null);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
-  const [storeUrl, setStoreUrl] = useState("");
   useAuth();
   const completionItems = store
     ? [
@@ -32,11 +31,7 @@ export default function DashboardPage() {
       ]
     : [];
 
-  useEffect(() => {
-    if (store?.slug) {
-      setStoreUrl(`${window.location.origin}/store/${store.slug}`);
-    }
-  }, [store]);
+
   const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   const total = completionItems.length;
@@ -185,9 +180,14 @@ export default function DashboardPage() {
                   Edit Store
                 </button>
               </div>
+
+
               <StoreQRCode
                 url={`${process.env.NEXT_PUBLIC_BASE_URL}/store/${store.slug}`}
               />
+
+
+
             </div>
             {/* <div className="bg-white border rounded-xl p-6 mb-8"></div> */}
             {/* QUICK ACTIONS */}

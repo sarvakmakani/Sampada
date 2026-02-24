@@ -134,84 +134,93 @@ export default async function StorePage({ params }) {
       </div>
 
       {/* HERO */}
-      <div className="bg-gradient-to-r from-[#0F172A] via-[#1E3A5F] to-[#0F172A] text-white">
-        <div className="max-w-6xl mx-auto px-6 py-16 flex items-center gap-6">
-          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#2E78B7] to-[#2FA4C4] flex items-center justify-center text-2xl font-bold">
-            {store.name.slice(0, 2).toUpperCase()}
-          </div>
+      {/* HERO */}
+<div className="bg-gradient-to-r from-[#0F172A] via-[#1E3A5F] to-[#0F172A] text-white">
 
-          <div>
-            <h1 className="text-4xl font-bold">{store.name}</h1>
+  <div className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16">
 
-            <p className="text-slate-300 mt-2">{store.description}</p>
-            {/* ADDRESS + MAP */}
-            <div className=" space-y-2 text-sm text-slate-300">
-              {store.address && (
-                <div className="flex items-start gap-2">
-                  <p>{store.address}</p>
-                </div>
-              )}
-            </div>
-            {/* SOCIAL PILLS */}
-            <div className="flex gap-3 mt-4 flex-wrap">
-              {store.socials?.whatsapp && (
-                <a
-                  href={`https://wa.me/${store.socials.whatsapp}`}
-                  target="_blank"
-                  className="flex items-center gap-2 border border-white/30 px-4 py-1 rounded-full text-sm hover:bg-white hover:text-black transition"
-                >
-                  <MessageCircle size={16} />
-                  WhatsApp
-                </a>
-              )}
+    <div className="flex flex-col items-center text-center md:flex-row md:text-left md:items-center md:gap-8">
 
-              {store.socials?.instagram && (
-                <a
-                  href={store.socials.instagram}
-                  target="_blank"
-                  className="flex items-center gap-2 border border-white/30 px-4 py-1 rounded-full text-sm hover:bg-white hover:text-black transition"
-                >
-                  <Instagram size={16} />
-                  Instagram
-                </a>
-              )}
-
-              {store.socials?.facebook && (
-                <a
-                  href={store.socials.facebook}
-                  target="_blank"
-                  className="flex items-center gap-2 border border-white/30 px-4 py-1 rounded-full text-sm hover:bg-white hover:text-black transition"
-                >
-                  <Facebook size={16} />
-                  Facebook
-                </a>
-              )}
-
-              {store.mapLink && (
-                <a
-                  href={store.mapLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 border border-white/30 px-4 py-1 rounded-full text-sm hover:bg-white hover:text-black transition"
-                >
-                  <MapPin size={16} />
-                  Location
-                </a>
-              )}
-            </div>
-            <div className="mt-2 text-sm text-slate-400">
-              Powered by{" "}
-              <a
-                href="/"
-                className="text-[#2FA4C4] font-medium hover:underline"
-              >
-                Sampada
-              </a>{" "}
-              — Create your own online store in minutes
-            </div>
-          </div>
-        </div>
+      {/* AVATAR */}
+      <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[#2E78B7] to-[#2FA4C4] flex items-center justify-center text-2xl font-bold shadow mb-4 md:mb-0">
+        {store.name[0].toUpperCase()}
       </div>
+
+      {/* INFO */}
+      <div className="w-full">
+
+        <h1 className="text-2xl md:text-4xl font-bold leading-tight">
+          {store.name}
+        </h1>
+
+        <p className="text-slate-300 mt-2 text-sm md:text-base max-w-md mx-auto md:mx-0">
+          {store.description}
+        </p>
+
+        {store.address && (
+          <p className="text-slate-400 text-sm mt-1">
+             {store.address}
+          </p>
+        )}
+
+        {/* SOCIAL BUTTONS */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-6">
+
+          {store.socials?.whatsapp && (
+            <a
+              href={`https://wa.me/${store.socials.whatsapp}`}
+              target="_blank"
+              className="flex items-center gap-2 bg-green-600 px-5 py-3 rounded-full text-sm font-medium hover:bg-green-700 transition min-h-[44px]"
+            >
+              <MessageCircle size={16} />
+              WhatsApp
+            </a>
+          )}
+
+          {store.socials?.instagram && (
+            <a
+              href={store.socials.instagram}
+              target="_blank"
+              className="flex items-center gap-2 border border-white/30 px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition min-h-[44px]"
+            >
+              <Instagram size={16} />
+              Instagram
+            </a>
+          )}
+
+          {store.socials?.facebook && (
+            <a
+              href={store.socials.facebook}
+              target="_blank"
+              className="flex items-center gap-2 border border-white/30 px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition min-h-[44px]"
+            >
+              <Facebook size={16} />
+              Facebook
+            </a>
+          )}
+
+          {store.mapLink && (
+            <a
+              href={store.mapLink}
+              target="_blank"
+              className="flex items-center gap-2 border border-white/30 px-5 py-3 rounded-full text-sm hover:bg-white hover:text-black transition min-h-[44px]"
+            >
+              <MapPin size={16} />
+              Location
+            </a>
+          )}
+
+        </div>
+
+        <div className="mt-5 text-xs text-slate-400">
+          Powered by{" "}
+          <a href="https://sampada-app.vercel.app/" className="text-[#2FA4C4] font-medium">Sampada</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* PRODUCTS */}
       <div className="max-w-6xl mx-auto px-6 py-14">

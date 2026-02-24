@@ -148,58 +148,33 @@ export default function ProductsPage() {
     <div className="min-h-screen bg-slate-100">
       <div className="max-w-7xl mx-auto px-6 py-10">
         {/* HEADER */}
-        <div className="flex justify-between items-center mb-8">
+        {/* HEADER */}
+        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <p className="text-sm text-slate-500">Home / Products</p>
-            <h1 className="text-3xl font-semibold text-slate-900 mt-1">
+            <p className="text-xs text-slate-500">Home / Products</p>
+
+            <h1 className="text-2xl md:text-3xl font-semibold text-slate-900 mt-1">
               Products
             </h1>
-            <p className="text-slate-500">Manage your store catalog</p>
+
+            <p className="text-slate-500 text-sm md:text-base">
+              Manage your store catalog
+            </p>
           </div>
 
           <button
             onClick={() => setShowForm(!showForm)}
-            className={`flex items-center gap-2 px-5 py-2 rounded-lg text-white transition ${
+            className={`flex items-center justify-center gap-2 px-5 py-3 rounded-lg text-white font-medium transition w-full md:w-auto ${
               showForm
                 ? "bg-slate-700"
                 : "bg-brand-primary hover:bg-brand-secondary"
             }`}
           >
-            <PackagePlus size={16} />
+            <PackagePlus size={18} />
             {showForm ? "Cancel" : "Add Product"}
           </button>
         </div>
 
-        {/* STATS */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
-            <Package className="text-brand-primary" />
-            <div>
-              <p className="text-sm text-slate-500">Total</p>
-              <p className="font-semibold">{products?.length || 0}</p>
-            </div>
-          </div>
-
-          <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
-            <Eye className="text-green-600" />
-            <div>
-              <p className="text-sm text-slate-500">Visible</p>
-              <p className="font-semibold">
-                {products.filter((p) => p.available).length || 0}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
-            <EyeOff className="text-red-600" />
-            <div>
-              <p className="text-sm text-slate-500">Hidden</p>
-              <p className="font-semibold">
-                {products.filter((p) => !p.available).length}
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* ADD PRODUCT PANEL */}
         {showForm && (
@@ -208,7 +183,7 @@ export default function ProductsPage() {
               <h2 className="font-semibold">New Product</h2>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-4 md:p-6 space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <input
                   placeholder="Product name"
@@ -236,11 +211,10 @@ export default function ProductsPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-
               {/* IMAGE UPLOAD */}
               <div
                 onClick={() => fileInputRef.current.click()}
-                className="border-2 border-dashed rounded-xl p-12 text-center cursor-pointer"
+                className="border-2 border-dashed rounded-xl p-8 md:p-12 text-center cursor-pointer"
               >
                 <input
                   type="file"
@@ -257,7 +231,6 @@ export default function ProductsPage() {
                   <p>Click to upload image</p>
                 </div>
               </div>
-
               {preview && <img src={preview} className="w-32 rounded-lg" />}
             </div>
 
@@ -279,10 +252,36 @@ export default function ProductsPage() {
           </div>
         )}
 
+        {/* STATS */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
+            <Package className="text-brand-primary" />
+            <div>
+              <p className="text-sm text-slate-500">Total</p>
+              <p className="font-semibold">{products?.length || 0}</p>
+            </div>
+          </div>
+          <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
+            <Eye className="text-green-600" />
+            <div>
+              <p className="text-sm text-slate-500">Visible</p>
+              <p className="font-semibold">
+                {products.filter((p) => p.available).length || 0}
+              </p>
+            </div>
+          </div>
+          <div className="bg-white border rounded-xl p-4 flex items-center gap-3">
+            <EyeOff className="text-red-600" />
+            <div>
+              <p className="text-sm text-slate-500">Hidden</p>
+              <p className="font-semibold">
+                {products.filter((p) => !p.available).length}
+              </p>
+            </div>
+          </div>
+        </div>
         {/* PRODUCTS GRID */}
-
-        {/* PRODUCTS GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <div
               key={product._id}
@@ -301,12 +300,10 @@ export default function ProductsPage() {
                     <div className="text-slate-400 text-sm">No Image</div>
                   )}
                 </div>
-
                 {/* CATEGORY BADGE */}
                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-brand-primary shadow">
                   {product.category || "General"}
                 </div>
-
                 {/* STATUS BADGE */}
                 <div
                   className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-medium shadow ${

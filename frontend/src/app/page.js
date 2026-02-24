@@ -1,5 +1,4 @@
 import {
-  Store,
   Smartphone,
   MessageCircle,
   Share2,
@@ -9,47 +8,39 @@ import {
 import logo from "./public/logoref3.png";
 import logonext from "./public/logoref1.png";
 import Image from "next/image";
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* NAVBAR */}
-      <nav className="bg-slate-100 border-b">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          {/* <div className="flex items-center gap-2 text-xl font-semibold">
-            <div className="w-8 h-8 bg-brand-primary text-white rounded flex items-center justify-center">
-              <Store size={18} />
-            </div>
-            Sampada
-          </div> */}
-          <div className=" font-bold text-brand-primary text-2xl flex items-center gap-3 ">
-            <Image
-              src={logo}
-              alt="Sampada"
-              className="w-16 h-16 object-contain"
-            />{" "}
-          </div>
 
-          <div className="flex items-center gap-3 text-sm">
-            {/* ABOUT */}
+      {/* NAVBAR */}
+      <nav className="bg-white border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+
+          <Image
+            src={logo}
+            alt="Sampada"
+            className="w-12 h-12 md:w-14 md:h-14 object-contain"
+          />
+
+          <div className="flex items-center gap-2 md:gap-3 text-sm">
             <a
               href="/about"
-              className="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-brand-primary transition"
+              className="px-3 md:px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-brand-primary transition"
             >
               About
             </a>
 
-            {/* LOGIN */}
             <a
               href="/login"
-              className="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-brand-primary transition"
+              className="hidden sm:inline-block px-4 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 transition"
             >
               Login
             </a>
 
-            {/* PRIMARY CTA */}
             <a
               href="/register"
-              className="bg-brand-primary text-white px-5 py-2 rounded-lg font-medium hover:bg-brand-secondary transition shadow-sm"
+              className="bg-brand-primary text-white px-4 md:px-5 py-2 rounded-lg font-medium hover:bg-brand-secondary transition shadow-sm"
             >
               Get Started
             </a>
@@ -58,28 +49,30 @@ export default function HomePage() {
       </nav>
 
       {/* HERO */}
-      <section className="bg-gradient-to-br from-brand-dark via-brand-primary to-brand-secondary text-white py-24 px-6 text-center">
+      <section className="bg-gradient-to-br from-brand-dark via-brand-primary to-brand-secondary text-white py-16 md:py-24 px-4 md:px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold leading-tight">
+
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight">
             Create your own online store in minutes.
           </h1>
 
-          <p className="mt-6 text-xl text-white/90">
-            Sampada helps small sellers showcase products, share catalogs, and
-            receive orders directly on WhatsApp — without technical complexity.
+          <p className="mt-4 md:mt-6 text-base md:text-xl text-white/90">
+            Sampada helps small sellers showcase products, share catalogs,
+            and receive orders directly on WhatsApp — without technical complexity.
           </p>
 
-          <div className="flex justify-center gap-4 mt-10">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8 md:mt-10">
             <a
               href="/register"
-className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded-xl font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition"            >
+              className="flex items-center justify-center gap-2 bg-white text-brand-primary px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition"
+            >
               Create Your Store
               <ArrowRight />
             </a>
 
             <a
               href="/about"
-              className="px-8 py-4 border border-white rounded-xl hover:bg-white hover:text-brand-primary transition"
+              className="px-6 md:px-8 py-3 md:py-4 border border-white rounded-xl hover:bg-white hover:text-brand-primary transition"
             >
               About Us
             </a>
@@ -88,13 +81,14 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
       </section>
 
       {/* PROBLEM */}
-      <section className="py-24 px-6 bg-gradient-to-b from-brand-primary/60 to-slate-50">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-brand-primary/60 to-slate-50">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-slate-900">
+
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
             Selling online shouldn't be complicated.
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-14">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-14">
             {[
               {
                 icon: Smartphone,
@@ -114,10 +108,10 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-white p-8 rounded-2xl border shadow-sm hover:shadow-lg transition"
+                className="bg-white p-6 md:p-8 rounded-2xl border shadow-sm hover:shadow-lg transition"
               >
                 <item.icon
-                  size={32}
+                  size={28}
                   className="text-brand-primary mx-auto mb-4"
                 />
 
@@ -125,7 +119,9 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
                   {item.title}
                 </h3>
 
-                <p className="text-slate-500 mt-3">{item.desc}</p>
+                <p className="text-slate-500 mt-3 text-sm md:text-base">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -133,13 +129,14 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
       </section>
 
       {/* FEATURES */}
-      <section className="py-24 px-6 bg-slate-50">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-50">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-slate-900">
+
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
             Everything a small seller needs.
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-10 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-10 md:mt-16">
             {[
               "Create a personal store link",
               "Show products professionally",
@@ -150,10 +147,12 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
             ].map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4 bg-slate-50 rounded-xl p-6 border"
+                className="flex items-center gap-4 bg-white rounded-xl p-5 md:p-6 border shadow-sm"
               >
-                <CheckCircle className="text-green-500" />
-                <p className="text-slate-700 font-medium">{item}</p>
+                <CheckCircle className="text-green-500 shrink-0" />
+                <p className="text-slate-700 font-medium text-sm md:text-base">
+                  {item}
+                </p>
               </div>
             ))}
           </div>
@@ -161,13 +160,14 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 px-6 bg-gradient-to-b from-slate-50 to-brand-primary/60">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-brand-primary/60">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-slate-900">
+
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
             Get started in 3 simple steps.
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-10 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-10 md:mt-16">
             {[
               "Create your store",
               "Add your products",
@@ -175,12 +175,14 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
             ].map((step, i) => (
               <div
                 key={i}
-                className="bg-white p-10 rounded-2xl border shadow-sm"
+                className="bg-white p-8 md:p-10 rounded-2xl border shadow-sm"
               >
-                <div className="text-5xl font-bold text-brand-primary">
+                <div className="text-4xl md:text-5xl font-bold text-brand-primary">
                   {i + 1}
                 </div>
-                <p className="mt-4 font-medium text-slate-800">{step}</p>
+                <p className="mt-4 font-medium text-slate-800">
+                  {step}
+                </p>
               </div>
             ))}
           </div>
@@ -188,67 +190,56 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
       </section>
 
       {/* FINAL CTA */}
-      <section className="bg-brand-dark text-white py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold">
+      <section className="bg-brand-dark text-white py-16 md:py-20 px-4 md:px-6 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold">
           Start your digital journey today.
         </h2>
 
-        <p className="mt-6 text-lg text-white/80">
+        <p className="mt-4 md:mt-6 text-base md:text-lg text-white/80">
           Join thousands of small sellers going online with Sampada.
         </p>
 
         <a
           href="/register"
-          className="inline-flex items-center gap-2 mt-10 bg-brand-secondary px-8 py-4 rounded-xl font-semibold text-lg hover:scale-105 transition"
+          className="inline-flex items-center gap-2 mt-8 md:mt-10 bg-brand-secondary px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:scale-105 transition"
         >
           Create Your Store Free
-          <ArrowRight />
+          <ArrowRight size={18} />
         </a>
       </section>
 
-      <footer className="bg-slate-100 text-brand-dark ">
-        <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
-          {/* BRAND */}
+      {/* FOOTER */}
+      <footer className="bg-slate-100 text-brand-dark">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+
           <div>
-            <div className="flex items-center gap-2 text-lg font-semibold">
-              <Image
+            <Image
               src={logonext}
               alt="Sampada"
-              className="w-16 h-16 object-contain"
-            />{" "}
-            </div>
-
+              className="w-14 h-14 object-contain"
+            />
             <p className="text-slate-500 mt-4 text-sm leading-relaxed">
-              Helping small sellers create their digital identity, showcase
-              products, and receive orders easily through WhatsApp.
+              Helping small sellers create their digital identity,
+              showcase products, and receive orders easily through WhatsApp.
             </p>
           </div>
 
-          {/* NAV LINKS */}
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Quick Links</h3>
-
+            <h3 className="font-semibold mb-4">Quick Links</h3>
             <div className="flex flex-col gap-2 text-sm text-slate-500">
-              <a href="/about" className="hover:text-brand-primary">
-                About Sampada
-              </a>
-              <a href="/login" className="hover:text-brand-primary">
-                Login
-              </a>
-              <a href="/register" className="hover:text-brand-primary">
-                Create Store
-              </a>
+              <a href="/about">About Sampada</a>
+              <a href="/login">Login</a>
+              <a href="/register">Create Store</a>
             </div>
           </div>
 
-          {/* CTA */}
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4">
+            <h3 className="font-semibold mb-4">
               Ready to start selling?
             </h3>
 
             <p className="text-sm text-slate-500 mb-4">
-              Create your online store in minutes and grow your business.
+              Create your online store in minutes.
             </p>
 
             <a
@@ -261,17 +252,11 @@ className="flex items-center gap-2 bg-white text-brand-primary px-8 py-4 rounded
           </div>
         </div>
 
-        {/* BOTTOM BAR */}
-        <div className="border-t bg-slate-100">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 gap-2">
-            <span>
-              © {new Date().getFullYear()} Sampada. All rights reserved.
-            </span>
-
-            <span>Built for small sellers of India</span>
-          </div>
+        <div className="border-t text-center text-sm text-slate-500 py-4">
+          © {new Date().getFullYear()} Sampada. All rights reserved.
         </div>
       </footer>
+
     </div>
   );
 }

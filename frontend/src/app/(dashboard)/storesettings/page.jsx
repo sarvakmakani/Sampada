@@ -96,16 +96,17 @@ const handleSave = async () => {
 return (
   <div className="max-w-4xl mx-auto">
 
-    <p className="text-sm text-slate-500">Home / Settings</p>
+    <div className="px-4 md:px-8 py-6 max-w-4xl mx-auto">
+        <p className="text-xs text-slate-500">Home / Settings</p>
 
-    <div className="mb-10">
-      <h1 className="text-3xl font-semibold text-slate-900">
-        Store Settings
-      </h1>
-      <p className="text-slate-500 mt-1">
-        Manage your store information and contact details
-      </p>
-    </div>
+        <h1 className="text-2xl md:text-3xl font-semibold mt-1">
+          Store Settings
+        </h1>
+
+        <p className="text-slate-500 text-sm mt-1">
+          Manage your store information and contact details
+        </p>
+      </div>
 
     <div className="space-y-8">
 
